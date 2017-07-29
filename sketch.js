@@ -37,8 +37,23 @@ function setup() {
 }
 
 function draw() {
-    background(33,33,30)
-    for (let i = 0; i < stepsPerFrame; i++) for (let task of tasks) task.update()        
+    drawBackground()
+    for (let i = 0; i < stepsPerFrame; i++) update()
     for (let task of tasks) task.draw()
     for (let task of tasks) task.postDraw()
+}
+
+function drawBackground() {
+    background(33,33,30)
+    push()
+        noStroke()
+        for(let i = 0; i < 20; i++) {
+            fill(38,38,34)
+            rect(i * (width / 20), 0, width / 40, height)
+        }
+    pop()
+}
+
+function update() {
+    for (let task of tasks) task.update()
 }

@@ -38,6 +38,7 @@ class Task {
         } else if (this.x + this.width > width - 50) {
             this.velocity -= edgeForce
             this.x = width - this.width - 60
+            this.velocity = 0
         }
     }
 
