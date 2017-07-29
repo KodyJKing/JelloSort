@@ -1,6 +1,6 @@
 var tasks, startHeight
 
-var taskCount = 50
+var taskCount = 200
 
 var orderForce = 1
 var friction = 0.7
@@ -8,24 +8,31 @@ var orderDiscount = 0.0
 var edgeForce = 1
 var asapForce = 0.1
 
+var minTaskWidth = 100
+var maxTaskWidth = 200
+
+var minconnections = 0
+var maxConnections = 3
+
 var paddingTime = 5
 
-var stepsPerFrame = 100
+// var stepsPerFrame = 100
+var stepsPerFrame = 10
 
 var taskHeight = 10
 var flagHeight = 10
 var flagWidth = 5
 var linkWidth = 5
-var minTaskWidth = 100
-var maxTaskWidth = 200
 
-var maxConnections = 3
+// var visualDamping  = 0.95
+var visualDamping  = 0.5
 
 function setup() {
     createCanvas(1920, 1000);
+    startHeight = (height - taskHeight) / 2
+
     tasks = []
     for (let i = 0; i < taskCount; i++) tasks.push(randomTask(i))
-    startHeight = (height - taskHeight) / 2
 }
 
 function randColor() {
@@ -33,7 +40,7 @@ function randColor() {
 }
 
 function randomParents(j) {
-    let count = random(maxConnections) | 0
+    let count = random(minconnections,maxConnections) | 0
     let parents = []
     if (j + 1 == tasks.length) return parents
     for (var i = 0; i < count; i++) {
@@ -67,7 +74,7 @@ function drawTask(task) {
     push()
     noStroke()
     fill(task.c)
-    task.sx = task.sx * 0.95 + task.x * 0.05
+    task.sx = task.sx * visualDamping + task.x * (1 - visualDamping)
     rect(task.sx, task.y + startHeight, task.w, taskHeight)
     rect(task.sx, task.y + startHeight - flagHeight, flagWidth, flagHeight)
     pop()
