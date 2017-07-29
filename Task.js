@@ -34,10 +34,10 @@ class Task {
     applyEdgeForce() {
         if (this.x < 50) {
             this.velocity += edgeForce
-            this.x = 50
-        } else if (this.x + this.width > width) {
+            this.x = 51
+        } else if (this.x + this.width > width - 50) {
             this.velocity -= edgeForce
-            this.x = width - this.width
+            this.x = width - this.width - 60
         }
     }
 
@@ -75,7 +75,7 @@ class Task {
             strokeCap(SQUARE)
             strokeWeight(linkWidth)
             if (this.isAfter(parent)) 
-                stroke(255, 255, 255, 30)
+                stroke(255, 255, 232, 30)
             else 
                 stroke(255, 0, 0, 200)
             bezier(

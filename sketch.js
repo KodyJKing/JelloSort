@@ -15,8 +15,7 @@ function randomParents(j) {
 
 function randomTask(tasks) {
     let task = new Task()
-    task.x = random(50, width)
-    task.y = Math.floor(random(100, height - 100) / (taskHeight * 2)) * taskHeight * 2
+    task.y = Math.floor(random(50, height - 50) / (taskHeight * 2)) * taskHeight * 2
     task.width = random(minTaskWidth, maxTaskWidth)
     task.color = [random(50, 150), random(50, 150), random(50, 150)]
 
@@ -38,7 +37,7 @@ function setup() {
 }
 
 function draw() {
-    background(30,30,30)
+    background(33,33,30)
     for (let i = 0; i < stepsPerFrame; i++) for (let task of tasks) task.update()        
     for (let task of tasks) task.draw()
     for (let task of tasks) task.postDraw()
